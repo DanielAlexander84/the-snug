@@ -9,16 +9,14 @@
 Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) is done: `docs/ARCHITECTURE.md`. Decisions from it are recorded in `docs/DECISIONS.md`.
 
 ## In progress
-- Phase 0 docs committed on branch `onboarding/phase-0-map`, not pushed. No code changed.
-- `CLAUDE.md` corrections drafted in the working tree, uncommitted, for Daniel to review.
+- Phase 0 PR open from branch `onboarding/phase-0-map`: docs and `CLAUDE.md` corrections. No code changed.
 
 ## Next up
-1. Daniel reviews the `CLAUDE.md` draft and approves Phase 0.
+1. Daniel merges the Phase 0 PR.
 2. Phase 1: write `docs/critical-paths.md` together.
 
 ## Blocked / waiting on Daniel
-- Review the `CLAUDE.md` draft (`git diff CLAUDE.md`).
-- Approval to start Phase 1.
+- Merge the Phase 0 PR, then say "start Phase 1".
 - No decisions are waiting. Hosting (D6) is open until Phase 4.
 
 ## Backlog
