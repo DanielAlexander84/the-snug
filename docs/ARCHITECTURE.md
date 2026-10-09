@@ -167,6 +167,8 @@ Ordered by how much it would hurt at first external user. None of these were fix
 - **R4. No Content Security Policy** (initializer fully commented out) and **`force_ssl` is off** in production.
 - **R5. No sign-out control** in the UI. Account deletion and data export have not been designed; only Devise's generated registration edit page exists, untested.
 - **R5a. No input limits.** Quest titles, step descriptions and the number of steps per request are unbounded. The "at least one step" rule is enforced only in the browser; the server accepts a quest with none.
+- **R19. Sign-up does not verify the email address** (found in Phase 1, 2026-10-09). Devise's stock registration signs the new account in at once; no mail is sent. Anyone can create and use an account under someone else's address, and the real owner later lands in that same account by magic link. Read from the gem source, not yet exercised.
+- **R20. The sign-in form reveals which emails have accounts** ("Could not find a user for that email address"; `config.paranoid` is off).
 
 **Deploy**
 
