@@ -46,16 +46,7 @@ Entry template:
 
 ## 1. Proposed (waiting for Daniel)
 
-### D18: When the UI gets restyled to match the designs
-**Status:** Proposed (2026-10-09)
-**Context:** The skeleton is unstyled; `docs/design/` shows a warm, dark tavern look and several features that do not exist.
-**Options:**
-- Restyle now, during onboarding.
-- One "look" slice right after onboarding Phase 4, before any feature work or alpha user.
-- Restyle piecemeal as each feature is built.
-**Decision:** Proposed: one slice straight after Phase 4 covering palette, typefaces, page frame and the screens that exist (sign-in, quest form, quest card). Things in the mockups that are features (hearth, Sage, room feed, witnessing) arrive with their own specs and bring their UI; no empty shells are built ahead of them.
-**Why:** Before Phase 3 a restyle could break flows with nothing to catch it. Much later, every feature gets styled twice. The alpha tests whether the room feels warm, so the look must exist before anyone sees it.
-**Revisit if:** The alpha is delayed and the look would only be seen by Daniel for months.
+None.
 
 ---
 
@@ -213,6 +204,18 @@ Entry template:
 **Why:** Being witnessed is the heart of the product, and it only works if people can choose to be seen. Shame-heavy tasks still need a way to stay private.
 **Open for the spec:** which option is the default, whether the choice can be changed later, and where the display name comes from (users have only an email today).
 **Revisit if:** Almost nobody picks one of the two options.
+
+### D18: When the UI gets restyled to match the designs
+**Status:** Accepted (Daniel, 2026-10-09). Daniel left the choice between "after Phase 3" and "after Phase 4" to the agent; after Phase 4 is kept.
+**Context:** The skeleton is unstyled; `docs/design/` shows a warm, dark tavern look and several features that do not exist.
+**Options:**
+- Restyle now, during onboarding.
+- One "look" slice right after onboarding Phase 4, before any feature work or alpha user.
+- Restyle piecemeal as each feature is built.
+**Decision:** One slice straight after Phase 4 covering palette, typefaces, page frame and the screens that exist (sign-in, quest form, quest card). Things in the mockups that are features (hearth, Sage, room feed, witnessing) arrive with their own specs and bring their UI; no empty shells are built ahead of them.
+**Why:** Before Phase 3 a restyle could break flows with nothing to catch it. Much later, every feature gets styled twice. The alpha tests whether the room feels warm, so the look must exist before anyone sees it.
+**Why after Phase 4 and not Phase 3:** onboarding allows no feature work until Phase 4 is merged, and Phase 4 brings the first deployed app (D6), so the look can be judged on a real phone instead of only on localhost.
+**Revisit if:** The alpha is delayed and the look would only be seen by Daniel for months.
 
 ---
 

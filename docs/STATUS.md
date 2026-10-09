@@ -18,7 +18,7 @@ Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) a
 
 ## Blocked / waiting on Daniel
 - Merge the wrap-up PR.
-- D18 (when to restyle the UI) is Proposed in `docs/DECISIONS.md`. Hosting (D6) is open until Phase 4.
+- Nothing else. D18 is accepted: the restyle is one slice straight after Phase 4. Hosting (D6) is decided at the start of Phase 4.
 - If the HTML source of the mockups still exists, add it to `docs/design/`: exact colours, spacing and fonts instead of estimates from screenshots.
 
 ## Backlog
