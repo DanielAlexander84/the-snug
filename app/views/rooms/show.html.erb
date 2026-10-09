@@ -1,0 +1,15 @@
+<% content_for :head do %>
+  <script type="application/json" id="room-data">
+    <%= json_escape({
+      room_name: @room.name,
+      current_user_email: current_user.email,
+      quests: @quests.map { |quest|
+        quest.as_json(only: [:id, :title], include: {
+          steps: { only: [:id, :description, :done, :position] }
+        }).merge(user_email: quest.user.email)
+      }
+    }.to_json).html_safe %>
+  </script>
+<% end %>
+
+<div id="room-root"></div>

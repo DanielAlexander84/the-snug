@@ -1,0 +1,18 @@
+<div class="max-w-sm mx-auto mt-24">
+  <h2 class="text-xl mb-4">Pull up a chair</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field mb-4">
+      <p><%= f.label :email %></p>
+      <p><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "border rounded px-2 py-1 w-full" %></p>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sign up", class: "border rounded px-3 py-1" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>
