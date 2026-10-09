@@ -9,7 +9,7 @@
 Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) is merged. Phase 1 (critical paths) is drafted in `docs/critical-paths.md` and waits for Daniel's approval.
 
 ## In progress
-- Phase 1 PR open, branch `onboarding/phase-1-critical-paths`. Docs only, no code changed. No CI ran (no workflow yet).
+- Phase 1 PR open: [#2](https://github.com/DanielAlexander84/the-snug/pull/2), branch `onboarding/phase-1-critical-paths`. Docs only, no code changed. No CI ran (no workflow yet).
 
 ## Next up
 1. Daniel reads `docs/critical-paths.md`, answers its three open questions, and merges the PR.
