@@ -6,18 +6,18 @@
 **Autonomy level:** Hobby
 
 ## Current focus
-Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) is merged. Phase 1 (critical paths) is approved: `docs/critical-paths.md`.
+Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) and Phase 1 (critical paths, `docs/critical-paths.md`) are merged. Phase 2 (characterisation tests) is next.
 
 ## In progress
-- Phase 1 PR open: [#2](https://github.com/DanielAlexander84/the-snug/pull/2), branch `onboarding/phase-1-critical-paths`. Docs only, no code changed. No CI ran (no workflow yet).
+- Nothing. A small wrap-up PR from branch `wrap/phase-1` (this file and one line in `CLAUDE.md`) is open.
 
 ## Next up
-1. Daniel merges PR #2.
-2. Phase 2 in a new chat (`/onboard Phase 2`): set up RSpec + Capybara and Jest (D7), then one end-to-end test per critical path, pinning today's behaviour. Each "WRONG TODAY" in the paths gets a comment in its test. Also pin that the sign-out address ends the session (no UI control exists yet).
-3. Phase 2 note: end-to-end tests find elements by label and role, not CSS classes, so the later restyle (D18) does not break them.
+1. Phase 2 in a new chat (`/onboard Phase 2`): set up RSpec + Capybara and Jest (D7), then one end-to-end test per critical path, pinning today's behaviour. Each "WRONG TODAY" in the paths gets a comment in its test. Also pin that the sign-out address ends the session (no UI control exists yet).
+2. Phase 2 starts with a plan for Daniel to approve: it adds gems and npm packages and is the first change outside `docs/`.
+3. Phase 2 note: end-to-end tests find elements by label and role, not CSS classes, so the later restyle (D18) does not break them. R19 and the "invalid link" message were read from gem source only; the tests are the first real check.
 
 ## Blocked / waiting on Daniel
-- Merge PR #2.
+- Merge the wrap-up PR.
 - D18 (when to restyle the UI) is Proposed in `docs/DECISIONS.md`. Hosting (D6) is open until Phase 4.
 - If the HTML source of the mockups still exists, add it to `docs/design/`: exact colours, spacing and fonts instead of estimates from screenshots.
 

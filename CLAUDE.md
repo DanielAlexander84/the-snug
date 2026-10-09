@@ -64,3 +64,4 @@ Everything in the profile's red zone list, plus:
 <!-- Added by /wrap. Short, concrete rules learned from real mistakes in this project. -->
 - The git repo root is this `code/` folder. Anything one level up (`../not-code/`, `../.github/`) is invisible to git, CI and other sessions. Before saying something "does not exist", check there; anything agents or CI need gets copied into the repo.
 - Look at `docs/design/` before proposing or recording a product decision. D12 was accepted and superseded the same day because the mockups were read afterwards.
+- Sign-in and sign-up behaviour lives in the Devise gems, not in `app/`. Before describing or reviewing an auth flow, read the gem's controller (`bundle info devise --path`). Phase 0 read only the app code and missed that sign-up signs you in without checking the email (R19).
