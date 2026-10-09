@@ -1,13 +1,13 @@
-# [Project name]
+# The Snug
 
 <!-- Fill in every [bracket]. Keep this file short: it's read at the start of every session. -->
 
 ## What this is
-[One paragraph: what the app does, for whom, and the one core action that matters most.]
+The Snug is a productivity-focused task manager built for adults with ADHD. Its core mechanic is simple: the user types a vague, anxiety-inducing task in natural language. An AI immediately breaks it into 4–5 steps so small and concrete that the first one is always doable in under two minutes. Completing steps earns XP and triggers positive reinforcement, replacing the shame loop of avoidance with a small dopamine reward. There are no streaks, no punishment for absence, and a guilt-free re-entry for users who disappear and come back.
 
 ## Autonomy level
-**[Hobby | Launch | Business]** (see `docs/agentic/autonomy-levels.md`)
-Self-merge on green CI for non-red-zone slices: [yes | no]
+**Hobby** (promote to Launch before the first external user)
+Self-merge on green CI for non-red-zone slices: no
 
 ## How we work
 Follow `docs/agentic/workflow.md`. In short:
@@ -30,7 +30,7 @@ Profile: `docs/agentic/rails-react.md`
 [Versions and anything that differs from the profile.]
 
 ## Architecture
-See `docs/ARCHITECTURE.md`. [One or two lines on the most important conventions.]
+See `docs/ARCHITECTURE.md`.
 
 ## Red zones for this project
 Everything in the profile's red zone list, plus:

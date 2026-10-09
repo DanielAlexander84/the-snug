@@ -9,6 +9,15 @@
 **Why:** [The reason that would still convince you in a year.]
 **Revisit if:** [The condition that would make this wrong.]
 
+## 2026-10-09 Staging environment
+**Context:** Kamal is already configured for the project.
+**Options:**
+- Deploy directly to production
+- Deploy to a staging environment and then to production
+**Decision:** Deploy to a staging environment and then to production at hobby level
+**Why:** Staging provides a safe place to test new features before they go live, reducing the risk of breaking the production site. I want this to be there the whole development process so I have a testing ground for agentic work and can observe how the model behaves in a live environment.
+**Revisit if:** The staging environment becomes a bottleneck or if the extra deployment step slows down development.
+
 ## 2026-10-09 LLM access through a single swappable adapter
 **Status:** Proposed. Needs Daniel's sign-off before any AI-related work.
 **Context:** The AI task breakdown feature calls an LLM. Cost will be a major
