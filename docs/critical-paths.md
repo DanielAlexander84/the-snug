@@ -2,7 +2,7 @@
 
 <!-- The 5 to 10 things that must never break. Each one has an end-to-end test. Written as user steps, not code. -->
 
-Onboarding Phase 1, drafted 2026-10-09 from the code on `main` at `59cd4ef`. **Draft until Daniel approves it.**
+Onboarding Phase 1, written 2026-10-09 from the code on `main` at `59cd4ef`. Approved by Daniel in chat the same day.
 
 These are the things a real person can do in The Snug today. Each one gets an end-to-end test in Phase 2 that pins the behaviour exactly as described here, including the parts marked **WRONG TODAY**. Those are pinned so that a change is noticed, not because they are wanted. Each has a backlog entry in `docs/STATUS.md`.
 
@@ -104,18 +104,18 @@ Also pinned: B cannot create a quest in A's name. A quest always belongs to whoe
 
 ## Not built yet
 
-These belong on this list once they exist. Each arrives with its own spec, and its critical path and end-to-end test are added in the same PR as the feature.
+Each of these arrives with its own spec. Those marked **critical once built** join the table above, with an end-to-end test, in the same PR as the feature.
 
-- Sage breaks a task into small steps (the AI breakdown)
+- **Critical once built:** Sage breaks a task into small steps (the AI breakdown)
+- **Critical once built:** deleting an account and its data
+- **Critical once built:** signing out. There is no control for it in the UI today (R5), so there is no user path to describe. The sign-out address itself already exists; Phase 2 pins that it ends the session, with a test that calls it directly. The full path is added when the control is built.
 - Another person taps "saw that" on a finished quest (witnessing)
 - A lit lantern is recorded and shown to the room as it happens
 - Choosing "say it plainly" or "keep it vague" per quest, and display names in place of emails (D16)
-- Signing out (R5: there is no control for it in the UI)
-- Deleting an account and its data
 - Coming back after time away, without guilt
 
-## Open questions for Daniel
+## Decided with Daniel (2026-10-09)
 
-1. **Sign-up without proof of the email address (R19).** Pin it as it is and fix it later with a spec, like the other wrong behaviours? That is what onboarding prescribes, and what this draft assumes. It is a red zone, and it belongs next to the privacy item as "before anyone else gets the URL".
-2. **Is "sign out" a critical path?** It cannot be one today, since there is no way to do it. It is on the not-built list.
-3. **Anything missing or not critical?** Eight paths is inside the five-to-ten range. Paths 6 and 7 could be merged; they are kept apart because the lantern is the heart of the product and should have its own test.
+- Sign-up without proof of the email address (R19) is pinned as it is in Phase 2 and fixed later with a spec.
+- Sign-out is critical, but later. Phase 2 pins only what exists (see above).
+- The Sage breakdown and account deletion become critical paths when they are built.

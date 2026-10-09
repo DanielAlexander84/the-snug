@@ -6,18 +6,18 @@
 **Autonomy level:** Hobby
 
 ## Current focus
-Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) is merged. Phase 1 (critical paths) is drafted in `docs/critical-paths.md` and waits for Daniel's approval.
+Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) is merged. Phase 1 (critical paths) is approved: `docs/critical-paths.md`.
 
 ## In progress
 - Phase 1 PR open: [#2](https://github.com/DanielAlexander84/the-snug/pull/2), branch `onboarding/phase-1-critical-paths`. Docs only, no code changed. No CI ran (no workflow yet).
 
 ## Next up
-1. Daniel reads `docs/critical-paths.md`, answers its three open questions, and merges the PR.
-2. Phase 2 in a new chat (`/onboard Phase 2`): set up RSpec + Capybara and Jest (D7), then one end-to-end test per critical path, pinning today's behaviour. Each "WRONG TODAY" in the paths gets a comment in its test.
+1. Daniel merges PR #2.
+2. Phase 2 in a new chat (`/onboard Phase 2`): set up RSpec + Capybara and Jest (D7), then one end-to-end test per critical path, pinning today's behaviour. Each "WRONG TODAY" in the paths gets a comment in its test. Also pin that the sign-out address ends the session (no UI control exists yet).
 3. Phase 2 note: end-to-end tests find elements by label and role, not CSS classes, so the later restyle (D18) does not break them.
 
 ## Blocked / waiting on Daniel
-- Approve or correct the critical paths, then merge the Phase 1 PR.
+- Merge PR #2.
 - D18 (when to restyle the UI) is Proposed in `docs/DECISIONS.md`. Hosting (D6) is open until Phase 4.
 - If the HTML source of the mockups still exists, add it to `docs/design/`: exact colours, spacing and fonts instead of estimates from screenshots.
 
