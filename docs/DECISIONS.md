@@ -46,7 +46,16 @@ Entry template:
 
 ## 1. Proposed (waiting for Daniel)
 
-None.
+### D18: When the UI gets restyled to match the designs
+**Status:** Proposed (2026-10-09)
+**Context:** The skeleton is unstyled; `docs/design/` shows a warm, dark tavern look and several features that do not exist.
+**Options:**
+- Restyle now, during onboarding.
+- One "look" slice right after onboarding Phase 4, before any feature work or alpha user.
+- Restyle piecemeal as each feature is built.
+**Decision:** Proposed: one slice straight after Phase 4 covering palette, typefaces, page frame and the screens that exist (sign-in, quest form, quest card). Things in the mockups that are features (hearth, Sage, room feed, witnessing) arrive with their own specs and bring their UI; no empty shells are built ahead of them.
+**Why:** Before Phase 3 a restyle could break flows with nothing to catch it. Much later, every feature gets styled twice. The alpha tests whether the room feels warm, so the look must exist before anyone sees it.
+**Revisit if:** The alpha is delayed and the look would only be seen by Daniel for months.
 
 ---
 
