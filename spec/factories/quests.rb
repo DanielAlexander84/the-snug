@@ -6,7 +6,7 @@ FactoryBot.define do
 
     transient do
       # Step descriptions, in order. Nothing is ticked unless listed in `done`.
-      step_descriptions { ["First step"] }
+      step_descriptions { [ "First step" ] }
       done { [] }
     end
 

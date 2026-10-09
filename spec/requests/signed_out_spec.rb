@@ -2,11 +2,11 @@ require "rails_helper"
 
 # Critical path 3: without being signed in, nothing can be read or changed
 RSpec.describe "Signed-out requests" do
-  let!(:quest) { create(:quest, title: "Renew passport", room: create(:room), step_descriptions: ["Find the old one"]) }
+  let!(:quest) { create(:quest, title: "Renew passport", room: create(:room), step_descriptions: [ "Find the old one" ]) }
   let(:step) { quest.steps.first }
 
   it "refuses to create a quest" do
-    post quests_path, params: { quest: { title: "Sneaky", steps_attributes: [{ description: "x", position: 0 }] } }, as: :json
+    post quests_path, params: { quest: { title: "Sneaky", steps_attributes: [ { description: "x", position: 0 } ] } }, as: :json
 
     expect(response).to have_http_status(:unauthorized)
     expect(Quest.count).to eq(1)

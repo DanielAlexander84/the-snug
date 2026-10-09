@@ -25,7 +25,7 @@ RSpec.configure do |config|
   # `bin/rails db:prepare` seeds the test database (a room and a user). Tests
   # build their own data, so every run starts from empty tables.
   config.before(:suite) do
-    [LanternEvent, Step, Quest, Room, User].each(&:delete_all)
+    [ LanternEvent, Step, Quest, Room, User ].each(&:delete_all)
   end
 
   config.before do

@@ -18,7 +18,7 @@ RSpec.describe "Signing in by magic link" do
     expect(page).to have_content("Come into the snug")
 
     expect(ActionMailer::Base.deliveries.size).to eq(1)
-    expect(last_email.to).to eq(["me@example.com"])
+    expect(last_email.to).to eq([ "me@example.com" ])
     expect(last_email.subject).to eq("Here's your magic login link ✨")
 
     visit magic_link_path

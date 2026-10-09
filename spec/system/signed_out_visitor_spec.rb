@@ -6,7 +6,7 @@ RSpec.describe "A signed-out visitor" do
     create(:quest, title: "Renew passport", room: create(:room))
   end
 
-  ["/", "/room"].each do |address|
+  [ "/", "/room" ].each do |address|
     it "is sent from #{address} to the sign-in page and sees no quests" do
       visit address
 

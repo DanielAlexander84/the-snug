@@ -29,7 +29,7 @@ RSpec.describe "Signing up" do
   it "ignores capitals and surrounding spaces in the address" do
     sign_up_as " Me@Example.com "
 
-    expect(User.pluck(:email)).to eq(["me@example.com"])
+    expect(User.pluck(:email)).to eq([ "me@example.com" ])
   end
 
   it "treats ' Me@Example.com ' and 'me@example.com' as the same account" do
@@ -59,7 +59,7 @@ RSpec.describe "Signing up" do
 
     it "later lands the real owner in the same account, with what the first person left there" do
       sign_up_as "owner@example.com"
-      post quests_path, params: { quest: { title: "Left by a stranger", steps_attributes: [{ description: "x", position: 0 }] } }, as: :json
+      post quests_path, params: { quest: { title: "Left by a stranger", steps_attributes: [ { description: "x", position: 0 } ] } }, as: :json
       delete destroy_user_session_path
 
       owner = User.find_by!(email: "owner@example.com")
@@ -67,7 +67,7 @@ RSpec.describe "Signing up" do
       follow_redirect!
 
       expect(User.count).to eq(1)
-      expect(owner.quests.pluck(:title)).to eq(["Left by a stranger"])
+      expect(owner.quests.pluck(:title)).to eq([ "Left by a stranger" ])
       expect(response.body).to include("Left by a stranger")
     end
   end
