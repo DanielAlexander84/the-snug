@@ -93,5 +93,5 @@ After each deploy: check the error tracker and the business heartbeat (see `obse
 ## 9. Record (agent, via /wrap)
 
 - `docs/STATUS.md`: what's done, what's in progress, what's next. This is how the next session, or you after two weeks away, picks up without rereading anything else.
-- `docs/DECISIONS.md`: one short entry per one-way door or notable choice.
+- `docs/DECISIONS.md`: one short entry per one-way door or notable choice. The agent proposes, Daniel accepts or rejects in chat, the agent updates the file. The exact loop and the status sections are at the top of that file. The agent never marks a decision Accepted on its own.
 - Framework retro: one line on whether anything in this session should become a framework rule.

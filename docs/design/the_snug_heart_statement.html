@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Snug — Why It Exists</title>
+<style>
+  :root{
+    --bg:#241a14;          /* deep warm near-black */
+    --bg2:#2e221a;         /* slightly lifted panel */
+    --card:#f3e4c4;        /* parchment / cream */
+    --card-ink:#4a3826;    /* ink on parchment */
+    --terracotta:#c8693f;  /* primary accent */
+    --terracotta-dim:#a8552f;
+    --sage:#8a9a78;        /* muted green */
+    --rose:#c98b7a;        /* dusty rose */
+    --amber:#e8b25a;       /* lantern glow */
+    --cream-soft:#e9d9bd;
+    --muted:#b59b7d;       /* muted warm text on dark */
+    --muted-dim:#8a755d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream-soft);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    padding:48px 20px 80px;
+  }
+  .wrap{max-width:680px;margin:0 auto;}
+
+  .eyebrow{
+    font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--terracotta);font-weight:700;margin:0 0 10px;
+  }
+  h1{
+    font-size:40px;line-height:1.1;margin:0 0 6px;color:#fdf6e9;
+    letter-spacing:-.01em;
+  }
+  .sub{color:var(--muted);font-size:17px;margin:0 0 40px;}
+
+  .lanterns{display:flex;gap:7px;margin:0 0 40px;}
+  .lantern{width:26px;height:34px;border-radius:5px;background:#3a2c20;border:1px solid #4a3826;}
+  .lantern.lit{background:linear-gradient(180deg,var(--amber),#c8893f);border-color:var(--amber);
+    box-shadow:0 0 14px rgba(232,178,90,.5);}
+
+  h2{
+    font-size:14px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--rose);font-weight:700;margin:42px 0 14px;
+  }
+
+  p{margin:0 0 18px;}
+  .lead{font-size:20px;color:#f1e3c8;line-height:1.55;}
+
+  .card{
+    background:var(--card);color:var(--card-ink);
+    border-radius:14px;padding:26px 28px;margin:34px 0;
+    border:1px solid #d8c39c;
+  }
+  .card p{margin:0;font-size:18px;line-height:1.55;}
+  .card .big{font-size:21px;font-weight:600;}
+
+  ul{list-style:none;padding:0;margin:0 0 18px;}
+  li{position:relative;padding-left:26px;margin:0 0 13px;color:var(--cream-soft);}
+  li::before{
+    content:"";position:absolute;left:0;top:10px;width:9px;height:9px;border-radius:50%;
+    background:var(--terracotta);
+  }
+  li.green::before{background:var(--sage);}
+  li strong{color:#fdf6e9;}
+
+  .vow li::before{background:var(--amber);box-shadow:0 0 8px rgba(232,178,90,.5);}
+
+  .quiet{color:var(--muted);font-size:15px;}
+
+  .divider{height:1px;background:#3a2c20;margin:44px 0;border:none;}
+
+  .footer{
+    margin-top:50px;padding-top:22px;border-top:1px solid #3a2c20;
+    color:var(--muted-dim);font-size:14px;
+  }
+  .footer em{color:var(--rose);font-style:normal;}
+
+  a{color:var(--amber);}
+  @media (max-width:520px){
+    h1{font-size:32px;} body{padding:32px 16px 60px;} .lead{font-size:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">The Snug · A co-working tavern</p>
+  <h1>Why this exists</h1>
+  <p class="sub">A place to begin the things you’ve been avoiding — warm, quiet, alongside others.</p>
+
+  <div class="lanterns" aria-hidden="true">
+    <span class="lantern lit"></span>
+    <span class="lantern lit"></span>
+    <span class="lantern lit"></span>
+    <span class="lantern"></span>
+    <span class="lantern"></span>
+    <span class="lantern"></span>
+  </div>
+
+  <p class="lead">For a lot of us, the hardest part of a task isn’t doing it. It’s
+  <em>starting</em> it. “Sort the insurance,” “reply to that email,” “call the doctor” —
+  small things that somehow grow heavy, sit untouched for weeks, and quietly pile up shame.</p>
+
+  <p>The Snug is a cosy room you step into when you’re stuck. You name the thing you’re
+  avoiding — plainly, or as vaguely as you like. A gentle guide helps break it into pieces so
+  small the first one is almost too easy. Then you do it, here, next to other people who are
+  doing their own hard small things — and someone sees you finish. That’s the whole magic:
+  <strong>you did a real thing, and you weren’t alone.</strong></p>
+
+  <div class="card">
+    <p class="big">The heart of it is simple: to help, support, and lift people up.</p>
+    <p style="margin-top:12px;">Not to keep you here. Not to win your attention. To help you
+    begin — and to be glad when, one day, you need us a little less.</p>
+  </div>
+
+  <h2>What makes it different</h2>
+  <ul>
+    <li><strong>The reward is real.</strong> No points, no levels, no streaks to protect. When you
+    finish something true, a lantern lights and a person nods — because the win lives out in your
+    life, not inside an app.</li>
+    <li><strong>Being seen is the point.</strong> Witnessing is warm and light — a quiet “saw that.”
+    Never proof, never surveillance. Just another human noticing you showed up.</li>
+    <li><strong>No shame, ever.</strong> Disappear for a month and come back — you’ll be met like a
+    regular walking back into the pub, not scolded for a broken streak.</li>
+    <li class="green"><strong>Together, not ranked.</strong> Everyone’s small victories weave into one
+    shared cloth. Not “look what I did,” but “look what we can all do when we put our hearts in.”</li>
+  </ul>
+
+  <h2>Who it’s for</h2>
+  <p>People — many of us with ADHD — who are tired of being told to just try harder, who’ve been
+  burned by apps that promised to fix them and added pressure instead. People who don’t need another
+  productivity tool. They need a warm corner, a gentle hand to start, and someone to notice they did.</p>
+
+  <hr class="divider">
+
+  <h2>The vows</h2>
+  <p class="quiet">Every screen, every word, every choice gets checked against these first.</p>
+  <ul class="vow">
+    <li>Does a tired, ashamed, overwhelmed person feel <strong>lifted and met</strong> — or judged?</li>
+    <li>Is the reward a <strong>real thing in the real world</strong>, or a shiny thing in here?</li>
+    <li>Does this welcome someone <strong>back without guilt</strong>?</li>
+    <li>Does it say <strong>“we”</strong> — never “you, compared to them”?</li>
+    <li>Would we be <strong>glad if someone needed us less</strong> because of it?</li>
+  </ul>
+
+  <div class="footer">
+    The Snug · working title &nbsp;·&nbsp; <em>built with care, for the people who find the small things hard</em>
+  </div>
+
+</div>
+</body>
+</html>
