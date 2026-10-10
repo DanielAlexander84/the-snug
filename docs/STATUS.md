@@ -9,16 +9,15 @@
 Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phases 0, 1 and 2 are merged. Phase 3 (gates and CI) is next.
 
 ## In progress
-- Nothing. A small wrap-up PR from branch `wrap/phase-2` (this file, `CLAUDE.md`, two proposed decisions) is open.
+- Nothing. A small wrap-up PR from branch `wrap/phase-2` (this file, `CLAUDE.md`, D19 and D20) is open.
 
 ## Next up
 1. Phase 3 in a new chat (`/onboard Phase 3`), starting with a plan: `bin/check`, GitHub Actions, baselines for the existing findings (below), ESLint, Prettier, `npm audit`, `strong_migrations`.
-2. Phase 3 also adds: a Node pin (`.nvmrc`, CI; D20 if accepted) and a `bin/rspec` wrapper, so bare `rspec` no longer prints the `diff-lcs` warning and CI, `bin/check` and the terminal share one command.
+2. Phase 3 also adds: the Node 22 pin (`.nvmrc`, `package.json`, CI; D20) and a `bin/rspec` wrapper, so bare `rspec` no longer prints the `diff-lcs` warning and CI, `bin/check` and the terminal share one command.
 3. CI needs Google Chrome and a Postgres service. `bundle exec rspec` builds Tailwind and the Vite bundle by itself.
 
 ## Blocked / waiting on Daniel
 - Merge the wrap-up PR.
-- Accept, change or reject D19 (test conventions) and D20 (Node 22) in `docs/DECISIONS.md`.
 - Hosting (D6) is decided at the start of Phase 4.
 - If the HTML source of the mockups still exists, add it to `docs/design/`: exact colours, spacing and fonts instead of estimates from screenshots.
 
