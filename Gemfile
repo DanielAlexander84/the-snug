@@ -69,3 +69,6 @@ gem "devise", "~> 5.0"
 gem "devise-passwordless", "~> 1.1"
 gem "vite_rails", "~> 3.11"
 gem "vite_ruby", "~> 3.10"
+
+# Migration safety gate: refuses migrations that lock tables or lose data on deploy
+gem "strong_migrations", "~> 2.8"

@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# Dependency audit gate for npm packages. Fails on advisories of high or critical
+# severity that are not on the ignore list in config/npm-audit.yml (npm has no
+# ignore list of its own). Lower severities are printed as a count only.
+require "json"
+require "open3"
+require "yaml"
+
+$stdout.sync = true
+
+BLOCKING = %w[ high critical ]
+CONFIG = File.expand_path("../config/npm-audit.yml", __dir__)
+
+ignored = Array(YAML.load_file(CONFIG)["ignore"])
+output, = Open3.capture2("npm", "audit", "--json")
+report = JSON.parse(output.force_encoding("UTF-8"))
+abort "npm audit failed: #{report["error"]["summary"]}" if report["error"]
+
+advisories = report.fetch("vulnerabilities").values.flat_map { |v| v["via"] }.grep(Hash).uniq { |a| a["url"] }
+blocking, lower = advisories.partition { |a| BLOCKING.include?(a["severity"]) }
+new_findings = blocking.reject { |a| ignored.include?(File.basename(a["url"])) }
+unused = ignored - blocking.map { |a| File.basename(a["url"]) }
+
+puts "npm audit: #{blocking.size} high or critical (#{blocking.size - new_findings.size} on the ignore list), #{lower.size} lower"
+puts "Ignore list entries that no longer match anything, delete them: #{unused.join(", ")}" if unused.any?
+
+if new_findings.any?
+  new_findings.each { |a| puts "  #{a["severity"]}: #{a["name"]}: #{a["title"]} (#{a["url"]})" }
+  abort "Vulnerabilities found!"
+end

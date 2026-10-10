@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: bin/check
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        # Same major version as local development.
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install npm packages
+        run: npm ci
+
+      # The same command as on a developer machine. It writes the failed gate
+      # to the job summary, so the reason shows on the PR page.
+      - name: Run all gates
+        run: bin/check
+
+  protected_paths:
+    name: Protected paths
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      # A warning, not a failure: Daniel reads these parts of the diff himself
+      # (docs/agentic/quality-gates.md, "Gate integrity rules").
+      - name: Warn when the PR changes gate configuration
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          PATTERN: >-
+            ^(\.github/|bin/(check|npm-audit|rspec|rubocop|brakeman|bundler-audit)$|\.rubocop|config/brakeman\.ignore$|config/bundler-audit\.yml$|config/npm-audit\.yml$|config/initializers/strong_migrations\.rb$|eslint\.config\.js$|eslint-suppressions\.json$|\.prettier|package\.json$|jest\.config\.cjs$|\.rspec$|\.nvmrc$|\.npmrc$|spec/(rails|spec)_helper\.rb$|spec/support/)
+        run: |
+          touched="$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[].filename' | grep -E "$PATTERN" || true)"
+          if [ -z "$touched" ]; then
+            echo "No protected paths touched." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          {
+            echo "### Protected paths changed"
+            echo
+            echo "This PR changes files that define the quality gates. Read these parts of the diff before merging, and check that each one is listed under **Gate changes** in the PR summary."
+            echo
+            echo "$touched" | sed 's/^/- `/; s/$/`/'
+          } > comment.md
+          cat comment.md >> "$GITHUB_STEP_SUMMARY"
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file comment.md --edit-last --create-if-none \
+            || echo "Could not comment on the PR (a PR from a fork has a read-only token). The list is in the job summary."

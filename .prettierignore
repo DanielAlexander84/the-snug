@@ -1,0 +1,7 @@
+# Baseline (onboarding Phase 3, 2026-10-10): files that were not Prettier-formatted
+# when the gate was switched on. Format a file, then delete its line. Do not add
+# lines without listing them under "Gate changes" in the PR.
+app/frontend/components/Quest.test.jsx
+app/frontend/components/Room.jsx
+app/frontend/components/Room.test.jsx
+vite.config.ts
