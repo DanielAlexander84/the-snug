@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# Every quality gate, in one command (docs/agentic/quality-gates.md). Run it
+# before every push; CI runs exactly this. Stops at the first failing gate.
+# Changing this file changes the gates: list it under "Gate changes" in the PR.
+set -uo pipefail
+cd "$(dirname "$0")/.."
+
+log="$(mktemp)"
+trap 'rm -f "$log"' EXIT
+
+gate() {
+  local name="$1"
+  shift
+  printf '\n== %s\n' "$name"
+  "$@" 2>&1 | tee "$log"
+  if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+    printf '\nFAILED GATE: %s\nCommand: %s\n' "$name" "$*"
+    if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+      {
+        printf '## Failed gate: %s\n\nCommand: `%s`\n\nLast lines of output:\n\n```\n' "$name" "$*"
+        tail -n 40 "$log"
+        printf '```\n'
+      } >> "$GITHUB_STEP_SUMMARY"
+    fi
+    exit 1
+  fi
+}
+
+node_version() {
+  local wanted
+  wanted="$(cat .nvmrc)"
+  if [[ "$(node -v)" != v"$wanted".* ]]; then
+    echo "Node $(node -v) is active, this project needs Node $wanted (D20). Run: nvm use"
+    return 1
+  fi
+  echo "Node $(node -v)"
+}
+
+# Runs every migration from scratch on the test database, so strong_migrations
+# sees new ones, and checks that db/schema.rb matches what they produce.
+migrations() {
+  RAILS_ENV=test bin/rails db:drop db:create db:migrate && git diff --exit-code db/schema.rb
+}
+
+gate "Node version" node_version
+
+gate "Lint: Ruby (RuboCop)" bin/rubocop
+gate "Lint: JavaScript (ESLint)" npm run --silent lint
+gate "Format: JavaScript (Prettier)" npm run --silent format:check
+
+gate "Security scan (Brakeman)" bin/brakeman --no-pager --quiet --exit-on-warn --exit-on-error
+gate "Dependency audit: gems (bundler-audit)" bin/bundler-audit check --update
+gate "Dependency audit: npm" bin/npm-audit
+
+gate "Migration safety (strong_migrations)" migrations
+
+gate "Component tests (Jest)" npm test
+gate "Browser and request tests (RSpec)" bin/rspec
+
+if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+  echo "All gates passed." >> "$GITHUB_STEP_SUMMARY"
+fi
+printf '\nAll gates passed.\n'
