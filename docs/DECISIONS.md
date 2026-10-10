@@ -46,7 +46,29 @@ Entry template:
 
 ## 1. Proposed (waiting for Daniel)
 
-None.
+### D19: Test conventions
+**Status:** Proposed (2026-10-10). The first three points are choices Daniel made in chat during Phase 2 (2026-10-09 and 10); the last two are the agent's. Recorded here so later sessions treat them as rules once accepted.
+**Context:** D7 fixed the frameworks (RSpec + Capybara, Jest). Phase 2 had to settle how tests are written, and agents copy what they see.
+**Options:** Selenium or Cuprite as browser driver; FactoryBot or plain helper methods for test data; Jest tests beside the components or in a separate `spec/javascript/` tree.
+**Decision:**
+- Browser tests drive headless Chrome through `selenium-webdriver`.
+- Test data comes from FactoryBot factories in `spec/factories/`.
+- A component's Jest test sits beside it: `Quest.test.jsx` next to `Quest.jsx`.
+- Browser tests find things by visible words, labels and roles, never by CSS class, and run with CSRF protection on.
+- A critical path gets a browser test; rules a browser cannot show (status codes, what is stored, what is refused) get a request spec.
+**Why:** Selenium is the Rails default. FactoryBot is the RSpec convention and scales as models grow. A test beside its component is easier to find. Finding things by visible words keeps the restyle (D18) from breaking tests.
+**Revisit if:** Selenium's driver download or flakiness costs time in CI (Cuprite is the alternative), or the Jest config drifts from Vite's (see D7).
+
+### D20: Node 22 for development and CI
+**Status:** Proposed (2026-10-10)
+**Context:** Node was not pinned (R17). Vite 8 needs Node 20.19 or newer. Under 20.18.3, `npm install` silently removed Vite's native build package twice, breaking the build and every browser test. Daniel set his nvm default to 22 on 2026-10-10.
+**Options:**
+- Node 22 (LTS, already installed on Daniel's machine).
+- Node 24 (newer LTS, also installed).
+- Stay unpinned.
+**Decision:** Proposed: Node 22, stated in `.nvmrc`, in `engines` in `package.json` and in CI, added in Phase 3. The production image gets the same version when R6 is fixed.
+**Why:** One stated version means local, CI and production build the frontend the same way, and a wrong Node fails loudly instead of quietly dropping a package.
+**Revisit if:** A dependency requires a newer Node, or Node 22 leaves maintenance.
 
 ---
 
