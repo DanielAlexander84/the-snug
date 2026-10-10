@@ -17,7 +17,7 @@ See [PLANNING.md](PLANNING.md) for the current slice map and design decisions.
 
 - Ruby 3.4.1 (see `.ruby-version` — install via [rbenv](https://github.com/rbenv/rbenv): `rbenv install 3.4.1`)
 - Postgres running locally (`pg_isready` to check)
-- Node.js (any recent LTS) + npm
+- Node.js 22 + npm (see `.nvmrc`; with nvm: `nvm use`). npm refuses to install under another version.
 
 ## Setup
 
@@ -72,13 +72,20 @@ Deploys are set up for [Kamal](https://kamal-deploy.org) (`config/deploy.yml`, `
 ## Tests / checks
 
 ```bash
-bundle exec rspec   # Rails tests: browser tests (headless Chrome) and request tests
-npm test            # React component tests (Jest), in app/frontend/components/*.test.jsx
-bin/rubocop         # style
+bin/check           # every gate below, in order, stopping at the first failure. CI runs exactly this.
+
+bin/rubocop         # Ruby style
+npm run lint        # JavaScript lint (ESLint)
+npm run format:check  # JavaScript formatting (Prettier); `npm run format` fixes it
 bin/brakeman        # security static analysis
-bin/bundler-audit   # dependency vulnerability scan
+bin/bundler-audit   # gem vulnerability scan
+bin/npm-audit       # npm vulnerability scan (high and critical only)
+npm test            # React component tests (Jest), in app/frontend/components/*.test.jsx
+bin/rspec           # Rails tests: browser tests (headless Chrome) and request tests
 ```
+
+`bin/check` also rebuilds the test database from the migrations, so `strong_migrations` checks new ones. Findings that existed when the gates were switched on are in baseline files (`.rubocop_todo.yml`, `.prettierignore`, `config/bundler-audit.yml`, `config/npm-audit.yml`); only new findings fail.
 
 The tests pin today's behaviour on the critical paths in `docs/critical-paths.md`. First run: `RAILS_ENV=test bin/rails db:prepare`. The browser tests need Google Chrome installed; they build the Tailwind stylesheet and the Vite bundle themselves.
 
-Single test: `bundle exec rspec spec/system/lantern_spec.rb:14` or `npm test -- Quest`.
+Single test: `bin/rspec spec/system/lantern_spec.rb:14` or `npm test -- Quest`.

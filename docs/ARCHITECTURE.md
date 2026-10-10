@@ -24,7 +24,7 @@ Not built, although one or more documents describe them: AI task breakdown, XP, 
 | Static assets | Propshaft | 1.3.2 |
 | Deploy tooling | Kamal, Docker | 2.12.0 |
 | Lint and security | rubocop-rails-omakase, Brakeman, bundler-audit | 1.1.0 / 8.0.5 / 0.9.3 |
-| Node | not pinned (no `.nvmrc`, no `engines`) | 20.18.3 on this machine |
+| Node | 22, pinned in `.nvmrc`, `engines` and CI since Phase 3 (D20) | 22.14.0 on this machine |
 
 The Rails app module is still `AdultingQuestLog`, and databases, the Kamal service and the DB password variable all carry the `adulting_quest_log` name. The product and the GitHub repo are called The Snug.
 
@@ -34,9 +34,9 @@ The Rails app module is still `AdultingQuestLog`, and databases, the Kamal servi
 - **Run:** `bin/dev` starts Foreman with three processes from `Procfile.dev`: Rails on port 3000, the Tailwind watcher, and the Vite dev server on port 3033.
 - **Sign in locally:** mail delivery is `:test` in development, so the magic link is only written to `log/development.log`. The README has the grep to pull it out.
 - **Seed:** creates the room "The Snug" and one user. `Room.the_one` is `Room.first!`, so an unseeded database makes every page a 404.
-- **Checks that exist:** `bin/rubocop`, `bin/brakeman`, `bin/bundler-audit`, and `bin/ci` which runs setup plus those three (`config/ci.rb`).
-- **Tests (since Phase 2):** `bundle exec rspec` and `npm test`.
-- **Checks that do not exist:** `bin/check`, any JS lint.
+- **Checks (since Phase 3):** `bin/check` runs every gate in order and stops at the first failure: RuboCop, ESLint, Prettier, Brakeman, bundler-audit, `bin/npm-audit`, migration safety (`strong_migrations`), Jest, RSpec. GitHub Actions (`.github/workflows/ci.yml`) runs the same command on every PR and on `main`, and comments on PRs that touch gate configuration. `bin/ci` and `config/ci.rb` were removed.
+- **Tests (since Phase 2):** `bin/rspec` and `npm test`.
+- **Checks that do not exist:** a type check (no TypeScript, D9).
 
 ## 4. Deployment
 
@@ -182,12 +182,12 @@ Ordered by how much it would hurt at first external user. None of these were fix
 **Quality**
 
 - **R11. No tests at all,** and the app was generated with `--skip-test`, so `bin/rails test` is not available until the test framework is added. *Closed in Phase 2 (2026-10-09): RSpec, Capybara and Jest are set up and the critical paths are pinned, see `docs/critical-paths.md`. `bin/rails test` still does not exist; the commands are `bundle exec rspec` and `npm test`.*
-- **R12. No CI.** There is no `.github/` directory. `bin/ci` runs locally only.
-- **R13. No JS lint, formatter, type check or dependency audit.** No `strong_migrations`.
+- **R12. No CI.** There is no `.github/` directory. `bin/ci` runs locally only. *Closed in Phase 3 (2026-10-10): GitHub Actions runs `bin/check`.*
+- **R13. No JS lint, formatter, type check or dependency audit.** No `strong_migrations`. *Closed in Phase 3 (2026-10-10), except the type check, which D9 rules out. Existing findings sit in baselines, listed in `docs/STATUS.md`.*
 - **R14. Silent failures in the UI.** Both `fetch` calls return without telling the user when the response is not OK. A rejected quest also clears the form, so what the user typed is lost. A thrown network error leaves the submit button disabled.
 - **R15. `/up` does not check the database.**
 - **R16. Dead or unused pieces:** `LanternEvent`, `Quest#completed?`, `GET /quests`, `jbuilder`, `image_processing`, the PWA views, Action Mailbox, Action Text and Active Storage (loaded, unused).
-- **R17. Node version unpinned,** and `bin/setup` skips `npm install`.
+- **R17. Node version unpinned,** and `bin/setup` skips `npm install`. *Node pinned to 22 in Phase 3 (D20). `bin/setup` still skips `npm install`.*
 - **R18. A personal email address is committed** in `db/seeds.rb`.
 
 ## 12. Where the planning documents were wrong or outdated
