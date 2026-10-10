@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import Quest from "../../../app/frontend/components/Quest"
+import Quest from "./Quest"
 
 function questWith(steps) {
   return {

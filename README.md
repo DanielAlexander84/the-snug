@@ -73,7 +73,7 @@ Deploys are set up for [Kamal](https://kamal-deploy.org) (`config/deploy.yml`, `
 
 ```bash
 bundle exec rspec   # Rails tests: browser tests (headless Chrome) and request tests
-npm test            # React component tests (Jest)
+npm test            # React component tests (Jest), in app/frontend/components/*.test.jsx
 bin/rubocop         # style
 bin/brakeman        # security static analysis
 bin/bundler-audit   # dependency vulnerability scan

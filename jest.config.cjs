@@ -2,7 +2,7 @@
 // transform is configured here and nowhere else.
 module.exports = {
   testEnvironment: "jsdom",
-  roots: ["<rootDir>/spec/javascript"],
+  roots: ["<rootDir>/app/frontend"],
   testMatch: ["**/*.test.jsx"],
   setupFilesAfterEnv: ["@testing-library/jest-dom"],
   transform: {

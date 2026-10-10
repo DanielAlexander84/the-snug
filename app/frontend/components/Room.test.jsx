@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import Room from "../../../app/frontend/components/Room"
+import Room from "./Room"
 
 const initialData = {
   room_name: "The Snug",

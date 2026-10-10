@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import NewQuestForm from "../../../app/frontend/components/NewQuestForm"
+import NewQuestForm from "./NewQuestForm"
 
 function stepBoxes() {
   return screen.getAllByPlaceholderText(/^Step \d+$/)

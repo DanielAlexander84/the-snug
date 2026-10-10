@@ -28,7 +28,7 @@ Follow `docs/agentic/workflow.md`. In short:
 - Run locally: `bin/dev` (Rails on 3000, Vite on 3033, Tailwind watcher)
 - Sign in locally: the magic link is only in `log/development.log`; the README has the grep
 - All gates: `bin/check` **does not exist yet** (onboarding Phase 3). Until then: `bin/ci` (RuboCop, Brakeman, bundler-audit) plus the two test commands below
-- Tests: `bundle exec rspec` (browser and request tests) and `npm test` (Jest component tests). First run needs `RAILS_ENV=test bin/rails db:prepare` and Google Chrome.
+- Tests: `bundle exec rspec` (browser and request tests) and `npm test` (Jest component tests, each beside its component as `Name.test.jsx`). First run needs `RAILS_ENV=test bin/rails db:prepare` and Google Chrome.
 - Single test: `bundle exec rspec path/to/file_spec.rb:LINE` or `npm test -- NameOfFile`
 - Deploy: not decided and nothing is deployed (D6). Kamal files in the repo are placeholders.
 
