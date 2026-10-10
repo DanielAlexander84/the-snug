@@ -6,19 +6,19 @@
 **Autonomy level:** Hobby
 
 ## Current focus
-Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) and Phase 1 (critical paths, `docs/critical-paths.md`) are merged. Phase 2 (characterisation tests) is next.
+Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phases 0 and 1 are merged. Phase 2 (characterisation tests) is in a PR from `onboarding/phase-2-characterisation-tests`. Phase 3 (gates and CI) is next.
 
 ## In progress
-- Nothing. A small wrap-up PR from branch `wrap/phase-1` (this file and one line in `CLAUDE.md`) is open.
+- Phase 2 PR, waiting for Daniel: 53 Rails tests (`bundle exec rspec`) and 19 component tests (`npm test`) pin the eight critical paths and the sign-out address. No app code changed.
 
 ## Next up
-1. Phase 2 in a new chat (`/onboard Phase 2`): set up RSpec + Capybara and Jest (D7), then one end-to-end test per critical path, pinning today's behaviour. Each "WRONG TODAY" in the paths gets a comment in its test. Also pin that the sign-out address ends the session (no UI control exists yet).
-2. Phase 2 starts with a plan for Daniel to approve: it adds gems and npm packages and is the first change outside `docs/`.
-3. Phase 2 note: end-to-end tests find elements by label and role, not CSS classes, so the later restyle (D18) does not break them. R19 and the "invalid link" message were read from gem source only; the tests are the first real check.
+1. Phase 3 in a new chat (`/onboard Phase 3`), starting with a plan: `bin/check`, GitHub Actions, baselines for the existing findings (below), ESLint, Prettier, `npm audit`, `strong_migrations`.
+2. Phase 3 must pin Node to 20.19 or newer (`.nvmrc`, CI). See "Things that have bitten us" in `CLAUDE.md`.
+3. CI needs Google Chrome and a Postgres service. `bundle exec rspec` builds Tailwind and the Vite bundle by itself.
 
 ## Blocked / waiting on Daniel
-- Merge the wrap-up PR.
-- Nothing else. D18 is accepted: the restyle is one slice straight after Phase 4. Hosting (D6) is decided at the start of Phase 4.
+- Review and merge the Phase 2 PR.
+- Hosting (D6) is decided at the start of Phase 4.
 - If the HTML source of the mockups still exists, add it to `docs/design/`: exact colours, spacing and fonts instead of estimates from screenshots.
 
 ## Backlog
@@ -34,14 +34,19 @@ Brownfield onboarding (`docs/agentic/brownfield-onboarding.md`). Phase 0 (map) a
 - [ ] R6 Production image likely does not build (no Node in `Dockerfile`), unverified
 - [ ] R7 Production mail unconfigured, placeholder sender and host
 - [ ] R8 No production database in deploy config; R9 room depends on seeds; R10 no backups or rollback
-- [ ] R11 No tests (Phase 2); R12 no CI, R13 no JS gates or `strong_migrations` (Phase 3); R15 `/up` skips the database (Phase 4)
+- [ ] R12 no CI, R13 no JS gates or `strong_migrations` (Phase 3); R15 `/up` skips the database (Phase 4)
+- [ ] Found in Phase 2, for the Phase 3 baselines: `bundler-audit` reports 7 advisories (activestorage, json, loofah x3, rack-proxy, rails-html-sanitizer), `npm audit` reports 3 high (nanoid, postcss, source-map-js, all under Vite) and 19 moderate (one cause, `sprintf-js` under Jest), RuboCop reports 30 offences in `app/` and `config/`. All but the 19 moderate were there before Phase 2.
+- [ ] The test environment has CSRF protection off, so the page carries no token and every write from React crashes there. Browser tests switch it on in `spec/support/capybara.rb`. Decide whether to turn it on for the whole test environment.
+- [ ] "What are you starting?" and "Steps" are not connected to their input boxes (no `for`/`id`), so screen readers do not announce them. Fix with the restyle (D18); the tests then switch from hint text to labels.
+- [ ] Email is normalised twice (the `normalizes` line in `User` and Devise's `case_insensitive_keys`/`strip_whitespace_keys`). Removing the model line changes nothing the tests can see.
+- [ ] Not covered by a test: a network error leaves "Start quest" disabled (R14), an unseeded database gives 404 on every page (R9), the Devise "edit account" page (R5).
 - [ ] R14 UI fails silently and clears the form on a rejected quest
 - [ ] R16 Dead code and unused gems; R17 Node unpinned, `bin/setup` skips `npm install`; R18 personal email in seeds
 - [ ] App is still named `AdultingQuestLog` in code, databases and deploy config (I7)
 - [ ] `tech-overview.md`, `PLANNING.md` and `gemini-groundwork.md` are partly wrong (ARCHITECTURE section 12): correct or retire
 
 ## Quarantined tests
-- None (there are no tests)
+- None
 
 ## Known baselines
 - RuboCop todo: not measured yet (Phase 3)

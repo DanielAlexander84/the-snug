@@ -48,6 +48,16 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Test framework (D7). In development too, so the generators and rake tasks are available.
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+end
+
+group :test do
+  # Browser tests for the critical paths: Capybara driving headless Chrome
+  gem "capybara"
+  gem "selenium-webdriver"
 end
 
 group :development do

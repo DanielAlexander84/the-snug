@@ -72,9 +72,13 @@ Deploys are set up for [Kamal](https://kamal-deploy.org) (`config/deploy.yml`, `
 ## Tests / checks
 
 ```bash
-bin/rubocop      # style
-bin/brakeman     # security static analysis
-bin/bundler-audit # dependency vulnerability scan
+bundle exec rspec   # Rails tests: browser tests (headless Chrome) and request tests
+npm test            # React component tests (Jest), in app/frontend/components/*.test.jsx
+bin/rubocop         # style
+bin/brakeman        # security static analysis
+bin/bundler-audit   # dependency vulnerability scan
 ```
 
-(No test suite yet — `--skip-test` was used when generating the app; the walking-skeleton slice is being verified manually for now.)
+The tests pin today's behaviour on the critical paths in `docs/critical-paths.md`. First run: `RAILS_ENV=test bin/rails db:prepare`. The browser tests need Google Chrome installed; they build the Tailwind stylesheet and the Vite bundle themselves.
+
+Single test: `bundle exec rspec spec/system/lantern_spec.rb:14` or `npm test -- Quest`.

@@ -35,7 +35,8 @@ The Rails app module is still `AdultingQuestLog`, and databases, the Kamal servi
 - **Sign in locally:** mail delivery is `:test` in development, so the magic link is only written to `log/development.log`. The README has the grep to pull it out.
 - **Seed:** creates the room "The Snug" and one user. `Room.the_one` is `Room.first!`, so an unseeded database makes every page a 404.
 - **Checks that exist:** `bin/rubocop`, `bin/brakeman`, `bin/bundler-audit`, and `bin/ci` which runs setup plus those three (`config/ci.rb`).
-- **Checks that do not exist:** `bin/check`, any test command, any JS lint.
+- **Tests (since Phase 2):** `bundle exec rspec` and `npm test`.
+- **Checks that do not exist:** `bin/check`, any JS lint.
 
 ## 4. Deployment
 
@@ -180,7 +181,7 @@ Ordered by how much it would hurt at first external user. None of these were fix
 
 **Quality**
 
-- **R11. No tests at all,** and the app was generated with `--skip-test`, so `bin/rails test` is not available until the test framework is added.
+- **R11. No tests at all,** and the app was generated with `--skip-test`, so `bin/rails test` is not available until the test framework is added. *Closed in Phase 2 (2026-10-09): RSpec, Capybara and Jest are set up and the critical paths are pinned, see `docs/critical-paths.md`. `bin/rails test` still does not exist; the commands are `bundle exec rspec` and `npm test`.*
 - **R12. No CI.** There is no `.github/` directory. `bin/ci` runs locally only.
 - **R13. No JS lint, formatter, type check or dependency audit.** No `strong_migrations`.
 - **R14. Silent failures in the UI.** Both `fetch` calls return without telling the user when the response is not OK. A rejected quest also clears the form, so what the user typed is lost. A thrown network error leaves the submit button disabled.

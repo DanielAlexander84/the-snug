@@ -4,22 +4,22 @@
 
 Onboarding Phase 1, written 2026-10-09 from the code on `main` at `59cd4ef`. Approved by Daniel in chat the same day.
 
-These are the things a real person can do in The Snug today. Each one gets an end-to-end test in Phase 2 that pins the behaviour exactly as described here, including the parts marked **WRONG TODAY**. Those are pinned so that a change is noticed, not because they are wanted. Each has a backlog entry in `docs/STATUS.md`.
+These are the things a real person can do in The Snug today. Each one has an end-to-end test (added in Phase 2) that pins the behaviour exactly as described here, including the parts marked **WRONG TODAY**. Those are pinned so that a change is noticed, not because they are wanted. Each has a backlog entry in `docs/STATUS.md`.
 
-Phase 2 tests find things by the visible words and labels quoted below, not by CSS classes, so the restyle (D18) does not break them. Changing a quoted text later means changing its test in the same PR.
+The tests find things by the visible words quoted below, not by CSS classes, so the restyle (D18) does not break them. Changing a quoted text later means changing its test in the same PR. The form's boxes are found by their grey hint text ("Name your quest", "Step 1"), because "What are you starting?" and "Steps" are not connected to their boxes in the page.
 
 ## The paths
 
 | # | Path | Steps | Test |
 |---|---|---|---|
-| 1 | Sign up | See below | Phase 2 |
-| 2 | Sign in by magic link | See below | Phase 2 |
-| 3 | A signed-out visitor is sent to sign-in | See below | Phase 2 |
-| 4 | Opening the room shows its quests | See below | Phase 2 |
-| 5 | Create a quest with steps | See below | Phase 2 |
-| 6 | Tick and untick a step | See below | Phase 2 |
-| 7 | The last step lights the lantern | See below | Phase 2 |
-| 8 | Nobody can change someone else's step | See below | Phase 2 |
+| 1 | Sign up | See below | `spec/system/sign_up_spec.rb`, `spec/requests/sign_up_spec.rb` |
+| 2 | Sign in by magic link | See below | `spec/system/magic_link_sign_in_spec.rb`, `spec/requests/magic_link_spec.rb` |
+| 3 | A signed-out visitor is sent to sign-in | See below | `spec/system/signed_out_visitor_spec.rb`, `spec/requests/signed_out_spec.rb` |
+| 4 | Opening the room shows its quests | See below | `spec/system/room_spec.rb`, `spec/requests/quests_spec.rb` |
+| 5 | Create a quest with steps | See below | `spec/system/create_quest_spec.rb`, `spec/requests/quests_spec.rb` |
+| 6 | Tick and untick a step | See below | `spec/system/steps_spec.rb`, `spec/requests/steps_spec.rb` |
+| 7 | The last step lights the lantern | See below | `spec/system/lantern_spec.rb` |
+| 8 | Nobody can change someone else's step | See below | `spec/system/someone_elses_step_spec.rb`, `spec/requests/steps_spec.rb` |
 
 ### 1. Sign up
 
@@ -108,7 +108,7 @@ Each of these arrives with its own spec. Those marked **critical once built** jo
 
 - **Critical once built:** Sage breaks a task into small steps (the AI breakdown)
 - **Critical once built:** deleting an account and its data
-- **Critical once built:** signing out. There is no control for it in the UI today (R5), so there is no user path to describe. The sign-out address itself already exists; Phase 2 pins that it ends the session, with a test that calls it directly. The full path is added when the control is built.
+- **Critical once built:** signing out. There is no control for it in the UI today (R5), so there is no user path to describe. The sign-out address itself already exists; `spec/requests/sign_out_spec.rb` pins that it ends the session, by calling it directly. The full path is added when the control is built.
 - Another person taps "saw that" on a finished quest (witnessing)
 - A lit lantern is recorded and shown to the room as it happens
 - Choosing "say it plainly" or "keep it vague" per quest, and display names in place of emails (D16)
