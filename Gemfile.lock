@@ -380,6 +380,8 @@ GEM
       net-sftp (>= 2.1.2)
       net-ssh (>= 2.8.0)
       ostruct
+    strong_migrations (2.8.0)
+      activerecord (>= 7.2)
     tailwindcss-rails (4.6.0)
       railties (>= 7.0.0)
       tailwindcss-ruby (~> 4.0)
@@ -460,6 +462,7 @@ DEPENDENCIES
   solid_cable
   solid_cache
   solid_queue
+  strong_migrations (~> 2.8)
   tailwindcss-rails
   thruster
   tzinfo-data
